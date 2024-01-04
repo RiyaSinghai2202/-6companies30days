@@ -1,0 +1,17 @@
+class Solution:
+    def findHighAccessEmployees(self, access_times: List[List[str]]) -> List[str]:
+        dic=defaultdict(list)
+        ans=[]
+        
+        for name,time in access_times:
+            dic[name].append(60*(int(time[:2]))+int(time[2:]))
+            
+        for emp_name in dic:
+            dic[emp_name].sort()
+            
+            for x, y in zip(dic[emp_name], dic[emp_name][2:]):
+                if y - x < 60:
+                    ans.append(emp_name)
+                    break
+
+        return list(ans)
