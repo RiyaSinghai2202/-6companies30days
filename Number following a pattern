@@ -1,0 +1,15 @@
+class Solution:
+    def printMinNumberForPattern(ob,s):
+        ans = ''
+        substr = ''
+        num = 1
+        for i in s:
+            substr+=str(num)
+            if i=='I':
+                ans += substr[::-1]
+                substr = ''
+            num+=1
+        substr += str(num)
+        ans += substr[::-1]
+        return ans
+ 
