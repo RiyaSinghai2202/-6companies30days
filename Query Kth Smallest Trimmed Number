@@ -1,0 +1,14 @@
+class Solution:
+    def smallestTrimmedNumbers(self, nums: List[str], queries: List[List[int]]) -> List[int]:
+        ans = []
+        def trim_nums(arr, k, trim):
+            trimmed_nums = [int(i[-trim:]) for i in arr]
+            sorted_indices=sorted(range(len(trimmed_nums)),key=lambda x: (trimmed_nums[x], x))
+            return sorted_indices[k]
+        
+        for k, trim in queries:
+            index = trim_nums(nums, k - 1, trim)
+            ans.append(index)
+        
+        return ans
+        
