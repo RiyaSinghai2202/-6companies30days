@@ -1,0 +1,23 @@
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        def subset(i,nums,sumsub,sub,ans,t):
+            if sumsub==t and len(sub)==k:
+                ans.append(sub.copy())
+                return
+            if sumsub>t or len(sub)>k:
+                return
+            if i>9:
+                return
+            
+            subset(i+1,k-1,sumsub,sub,ans,t)
+            sumsub+=i
+            sub.append(i)
+            subset(i+1,k,sumsub,sub,ans,t)
+            sumsub-=i
+            sub.pop(-1)
+             
+        ans=[]
+        sub=[]
+        subset(1,k,0,sub,ans,n)
+        return ans
+        
