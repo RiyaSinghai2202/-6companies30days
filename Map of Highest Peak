@@ -1,0 +1,24 @@
+class Solution:
+    def highestPeak(self, iswater: List[List[int]]) -> List[List[int]]:
+        m=len(iswater)
+        n=len(iswater[0])
+        ans=[[-1]*n for _ in range(m)]
+        bfs = deque([])
+        for i in range(m):
+            for j in range(n):
+                if iswater[i][j]==1:
+                    bfs.append((i, j))
+                    ans[i][j]=0
+        dr = [0, 0, 1,-1, 0]
+        dc = [1,-1, 0 , 0]
+        while bfs:
+            r, c = bfs.popleft()
+            for i in range(4):
+                nr = r + dr[i]
+                nc = c + dc[i]
+                if nr<0 or nr==m or nc<0 or nc==n or ans[nr][nc]!= -1:
+                    continue
+                ans[nr][nc] = ans[r][c] + 1
+                bfs.append((nr, nc))
+        
+        return ans
